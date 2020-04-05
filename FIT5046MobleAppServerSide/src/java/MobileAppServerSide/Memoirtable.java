@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Memoirtable.findByWatchdate", query = "SELECT m FROM Memoirtable m WHERE m.watchdate = :watchdate")
     , @NamedQuery(name = "Memoirtable.findByWatchtime", query = "SELECT m FROM Memoirtable m WHERE m.watchtime = :watchtime")
     , @NamedQuery(name = "Memoirtable.findByComment", query = "SELECT m FROM Memoirtable m WHERE m.comment = :comment")
-    , @NamedQuery(name = "Memoirtable.findByRatingscore", query = "SELECT m FROM Memoirtable m WHERE m.ratingscore = :ratingscore")})
+    , @NamedQuery(name = "Memoirtable.findByRatingscore", query = "SELECT m FROM Memoirtable m WHERE m.ratingscore = :ratingscore")
+, @NamedQuery(name = "Memoirtable.findByMovienameANDSuburb", query = "SELECT m FROM Memoirtable m WHERE m.moviename =:moviename AND m.cinemaid = (SELECT c.cinemaid FROM Cinematable c WHERE c.suburb =:suburb)")})
 public class Memoirtable implements Serializable {
 
     private static final long serialVersionUID = 1L;

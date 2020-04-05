@@ -6,10 +6,12 @@
 package service;
 
 import MobileAppServerSide.Credentialstable;
+import java.sql.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -87,5 +89,34 @@ public class CredentialstableFacadeREST extends AbstractFacade<Credentialstable>
     protected EntityManager getEntityManager() {
         return em;
     }
+        
+  @GET
+    @Path("findByUsername/{username}")
+    @Produces({"application/json"})
+    public List<Credentialstable> findByUsername(@PathParam("username") String username)
+        {
+            Query query = em.createNamedQuery("Credentialstable.findByUsername");
+            query.setParameter("username",username);
+            return query.getResultList();
+        }
     
+    @GET
+    @Path("findByPasswordhash/{passwordhash}")
+    @Produces({"application/json"})
+    public List<Credentialstable> findByPasswordhash(@PathParam("passwordhash") String passwordhash)
+        {
+            Query query = em.createNamedQuery("Credentialstable.findByPasswordhash");
+            query.setParameter("passwordhash",passwordhash);
+            return query.getResultList();
+        }
+    
+    @GET
+    @Path("findBySignupdate/{signupdate}")
+    @Produces({"application/json"})
+    public List<Credentialstable> findBySignupdate(@PathParam("signupdate") Date signupdate)
+        {
+            Query query = em.createNamedQuery("Credentialstable.findBySignupdate");
+            query.setParameter("signupdate",signupdate);
+            return query.getResultList();
+        }
 }
